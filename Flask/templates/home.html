@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block body %}
+<div id = 'main-home'>
+    <h2>Hot Jobs</h2>
+    <div id = hot-jobs>
+        <div>
+            <h3><a id = 'link-1' href = '#' ></a></h3>
+            <h4 id = 'company-1'></h4>
+            <p id = 'description-1'> </p>
+        </div>
+        <div>
+            <h3><a id = 'link-2' href = '#' ></a></h3>
+            <h4 id = 'company-2'></h4>
+            <p id = 'description-2'> </p>
+        </div>
+        <div>
+            <h3><a id = 'link-3' href = '#' ></a></h3>
+            <h4 id = 'company-3'></h4>
+            <p id = 'description-3'> </p>
+        </div>
+        <div>
+            <h3><a id = 'link-3' href = '#' ></a></h3>
+            <h4 id = 'company-3'></h4>
+            <p id = 'description-3'> </p>
+        </div>
+        <div>
+            <h3><a id = 'link-4' href = '#' ></a></h3>
+            <h4 id = 'company-4'></h4>
+            <p id = 'description-4'> </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function (){
+  
+      $.each([
+      "{{ url_for('job', folder='Sales', filename='job00621') }}",
+      "{{ url_for('job', folder='Healthcare_Nursing', filename='job00423') }}",
+      "{{ url_for('job', folder='Engineering', filename='job00001') }}",
+      "{{ url_for('job', folder='Accounting_Finance', filename='job00232') }}",
+      ], function(i, a){
+        $.get(a, function(data){
+          var title = $(data).find('#title').text();
+          var shortened = $(data).find('#description').text().substring(0, 400);
+          var company = $(data).find('#company').text();
+            
+          // Embed data into the engineering homepage
+          $("#link-" + String(i+1)).text(title);
+          $("#company-" + String(i+1)).text(company);
+          $("#description-" + String(i+1)).text(shortened + '...');
+        });
+        $("#link-" + String(i+1)).attr("href", a)
+      });    
+    });
+</script>
+{% endblock %}

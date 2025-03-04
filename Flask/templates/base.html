@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css" media="all" />
+    <script src="{{ url_for('static', filename='jquery-3.6.0.js') }}"></script>
+    <title>Home</title>
+</head>
+<body>
+    <h1> <a href = '/'> JobSearch</a></h1>
+    <ul>
+        <li><a href = '/sales'>Sales</a></li>
+        <li><a href = '/healthcare'>Healthcare & Nursing</a></li>
+        <li><a href = '/finance'>Accounting & Finance</a></li>
+        <li><a href = '/engineering'>Engineering</a></li>
+        <li><a href = '/createjob'>Create New Job</a></li>
+        <li class = 'searchbar'>
+                <form action = "/search" method = "POST">
+                    <br>
+                    <input type = "text" name = "searchword" id = 'searchword'class = "field" placeholder = "Search..."/>
+                    <input type = "submit" name= 'search' class = "submit"/>
+                </form>
+        </li>
+    </div>
+    </ul>
+{% block body %}
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+</body>
+</html>

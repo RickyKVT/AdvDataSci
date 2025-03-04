@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block body %}
+<div id = 'main-search'>
+    <div id = 'content'>
+        <h3> Results for {{search_string}}</h3>
+        <div>
+            <h3> <a id = 'link-1' href = '#'></a></h3>
+        </div>
+        <div>
+            <h3> <a id = 'link-2' href = '#'></a></h3>
+        </div>
+        <div>
+            <h3> <a id = 'link-3' href = '#'></a></h3>
+        </div>
+        <div>
+            <h3> <a id = 'link-4' href = '#'></a></h3>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function (){
+  
+        let article_all = {{ article_search | safe}};
+   
+        $.each(article_all, function(i, a){
+            var article_link = "{{ url_for('job', folder='folder_holder', filename='filename_holder') }}".replace('folder_holder', a[0]).replace('filename_holder', a[1])
+            $.get(article_link, function(data){
+                var title = $(data).find('#title').text();
+        $("#link-" + String(i+1)).text(title);
+  
+      });
+      $("#link-" + String(i+1)).attr("href", article_link)
+    });
+  
+  });
+  
+</script>
+{% endblock %}
